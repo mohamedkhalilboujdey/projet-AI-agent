@@ -2,8 +2,9 @@ import { Body, Controller, Get, HttpException, HttpStatus, Post, Request, UseGua
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { AuthGuard } from './jwt-auth.guard';
 import { LoginUserDTO } from 'src/users/dto/login-user.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -24,9 +25,10 @@ export class AuthController {
     return this.authService.login(user);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('jwt')
+  @UseGuards(AuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req) {
+    return this.usersService.findAll();
   }
 }
