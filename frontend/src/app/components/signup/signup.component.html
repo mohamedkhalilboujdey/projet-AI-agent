@@ -1,0 +1,107 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <div class="signup-header">
+      <h1>Create Account</h1>
+      <p>Join us and start analyzing your CV</p>
+    </div>
+    
+    <form (ngSubmit)="onSubmit()" class="signup-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            [(ngModel)]="signupData.firstName" 
+            class="form-control" 
+            placeholder="Enter your first name"
+            required
+            [disabled]="isLoading"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName" 
+            [(ngModel)]="signupData.lastName" 
+            class="form-control" 
+            placeholder="Enter your last name"
+            required
+            [disabled]="isLoading"
+          >
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="signupData.email" 
+          class="form-control" 
+          placeholder="Enter your email"
+          required
+          [disabled]="isLoading"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          [(ngModel)]="signupData.password" 
+          class="form-control" 
+          placeholder="Create a password"
+          required
+          [disabled]="isLoading"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword" 
+          [(ngModel)]="signupData.confirmPassword" 
+          class="form-control" 
+          placeholder="Confirm your password"
+          required
+          [disabled]="isLoading"
+        >
+      </div>
+      
+      <div class="form-options">
+        <label class="checkbox-container">
+          <input type="checkbox" required [disabled]="isLoading">
+          <span class="checkmark"></span>
+          I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+        </label>
+      </div>
+      
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      
+      <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      
+      <button type="submit" class="btn-signup" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Create Account</span>
+        <span *ngIf="isLoading">Creating Account...</span>
+      </button>
+    </form>
+    
+    <div class="signup-footer">
+      <p>Already have an account? <a (click)="goToLogin()" class="login-link">Sign in</a></p>
+    </div>
+  </div>
+</div> 

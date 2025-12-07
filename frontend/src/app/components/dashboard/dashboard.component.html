@@ -1,0 +1,146 @@
+<div class="dashboard-container" *ngIf="user">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="user-profile">
+      <div class="avatar-container">
+        <div class="avatar">
+          <img src="https://via.placeholder.com/60x60/667eea/ffffff?text={{ user.firstName.charAt(0) }}" alt="User Avatar">
+        </div>
+        <div class="notification-badge">4</div>
+      </div>
+      <div class="user-info">
+        <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+        <p class="user-role">{{ user.role }}</p>
+        <p class="user-email">{{ user.email }}</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active">
+        <i class="nav-icon">📊</i>
+        Dashboard
+      </a>
+      <a href="#" class="nav-item">
+        <i class="nav-icon">📤</i>
+        Upload CV
+      </a>
+      <a href="#" class="nav-item">
+        <i class="nav-icon">📈</i>
+        Analysis Result
+      </a>
+      <a href="#" class="nav-item">
+        <i class="nav-icon">💼</i>
+        Job Recommendations
+      </a>
+      <a href="#" class="nav-item">
+        <i class="nav-icon">👤</i>
+        My Profile
+      </a>
+      <a href="#" class="nav-item">
+        <i class="nav-icon">⚙️</i>
+        Settings
+      </a>
+      <a href="#" class="nav-item" (click)="logout()">
+        <i class="nav-icon">🚪</i>
+        Logout
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <h1>CV Analysis</h1>
+        <p class="date-range">01 - 25 March, 2020</p>
+      </div>
+      <div class="header-right">
+        <div class="collaborators">
+          <div class="collaborator-avatar">
+            <img src="https://via.placeholder.com/32x32/10B981/ffffff?text=1" alt="Collaborator 1">
+          </div>
+          <div class="collaborator-avatar">
+            <img src="https://via.placeholder.com/32x32/3B82F6/ffffff?text=2" alt="Collaborator 2">
+          </div>
+          <div class="collaborator-avatar">
+            <img src="https://via.placeholder.com/32x32/F59E0B/ffffff?text=3" alt="Collaborator 3">
+          </div>
+          <div class="add-collaborator">
+            <span>+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Chart -->
+    <div class="activity-chart">
+      <div class="chart-bars">
+        <div class="chart-bar" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]" 
+             [class.active]="i === 12"></div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <div class="main-content-left">
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+          <div class="activity-section" *ngFor="let section of activities">
+            <h3 class="section-date">{{ section.date }}</h3>
+            
+            <div class="activity-item" *ngFor="let item of section.items">
+              <div class="activity-indicator" [class]="'indicator-' + item.color"></div>
+              <div class="activity-content">
+                <div class="activity-main">
+                  <span class="activity-type">{{ getActivityTypeText(item.type) }}</span>
+                  <span class="activity-time">{{ item.time }}</span>
+                  <span class="activity-format" *ngIf="item.format">Format: {{ item.format }}</span>
+                </div>
+                <div class="activity-details">
+                  <span class="filename" *ngIf="item.filename">{{ item.filename }}</span>
+                  <span class="keywords" *ngIf="item.keywords">{{ item.keywords.join(', ') }}</span>
+                  <span class="category" *ngIf="item.category">{{ item.category }}</span>
+                  <span class="example" *ngIf="item.example">{{ item.example }}</span>
+                  <span class="count" *ngIf="item.count">{{ item.count }} recommended</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="right-panel">
+        <!-- Keyword Breakdown -->
+        <div class="insight-card">
+          <h3>Keyword Category Breakdown</h3>
+          <div class="keyword-breakdown">
+            <div class="keyword-item" *ngFor="let keyword of keywordBreakdown">
+              <div class="keyword-info">
+                <span class="keyword-category">{{ keyword.category }}</span>
+                <span class="keyword-percentage">{{ keyword.percentage }}%</span>
+              </div>
+              <div class="keyword-bar">
+                <div class="keyword-progress" 
+                     [style.width.%]="keyword.percentage"
+                     [style.background-color]="keyword.color"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimize Resume -->
+        <div class="insight-card optimize-card">
+          <div class="optimize-illustration">
+            <div class="file-cabinet">📁</div>
+            <div class="plant">🌱</div>
+          </div>
+          <h3>Optimize your resume</h3>
+          <p>Consider adding Docker to Strengthen your Devops profile</p>
+          <button class="btn-improve">IMPROVE MY CV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

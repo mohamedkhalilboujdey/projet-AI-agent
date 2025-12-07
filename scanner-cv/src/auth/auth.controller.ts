@@ -15,7 +15,9 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() dto: CreateUserDto) {
-    return this.usersService.create(dto); // hash dans users.service.ts
+    const user = await this.usersService.create(dto);
+    const { password, ...userWithoutPassword } = user.toObject();
+    return this.authService.login(userWithoutPassword);
   }
 
   @Post('login')

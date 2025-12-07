@@ -16,7 +16,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Analyzer IA C.V')
-    .setDescription('Description de mon API')
+    .setDescription('API pour analyser des CV PDF')
     .setVersion('1.0')
     .addBearerAuth({
       type: 'http',

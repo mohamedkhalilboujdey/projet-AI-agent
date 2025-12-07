@@ -19,5 +19,5 @@ html: string;
 @ApiProperty()
 @IsOptional()
 @IsString()
-tsxt?: string;
+text?: string;
 }
